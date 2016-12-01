@@ -20,14 +20,23 @@ app.controller('Controller', function ($scope, $http) {
         ]
     };
 
+    $scope.dataSet = '';;
+    $scope.size = '';
+
     $scope.simulate = function () {
         $http({
             method: 'GET',
-            url: '/sort?no=' + $scope.number
+            url: '/sort',
+            params: {
+                dataSet: $scope.dataSet,
+                size: $scope.size,
+                number: $scope.number
+            }
         }).then(function successCallback(response) {
 
-            console.log(response);
-            $scope.numbers = response.data.numbers;
+            //console.log(response.params);
+            //$scope.numbers = response.data.numbers;
+
             var data = response.data;
             $scope.merge = data.time[0];
             $scope.quick = data.time[1];
@@ -36,7 +45,7 @@ app.controller('Controller', function ($scope, $http) {
             $scope.radix = data.time[4];
 
             $scope.output = [
-                { name: 'Merge', value: $scope.merge, colour: 'list-group-item list-group-item-action list-group-item-info' , style:''},
+                { name: 'Merge', value: $scope.merge, colour: 'list-group-item list-group-item-action list-group-item-info', style: '' },
                 { name: 'Quick', value: $scope.quick, colour: 'list-group-item list-group-item-action list-group-item-danger', style: '' },
                 { name: 'Heap', value: $scope.heap, colour: 'list-group-item list-group-item-action list-group-item-success', style: '' },
                 { name: 'Insertion', value: $scope.insertion, colour: 'list-group-item list-group-item-action list-group-item-warning', style: '' },

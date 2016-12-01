@@ -21,7 +21,7 @@
                             <div class="form-group">
                                 <label class="sr-only">Input size</label>
                                 <input class="form-control" placeholder="Enter input size" ng-model="number">
-                            </div>
+                            </div> 
                             <button type="button" class="btn btn-primary" ng-click="simulate()">Simulate</button>
                         </form>
                     </div>
@@ -44,7 +44,7 @@
             </div>
             <div class="col-md-6">
                 <div class="list-group" ng-repeat="o in output">
-                    <a href="#" class="{{o.colour}}" style={{o.style}}>{{o.name}} Sort : {{o.value}}ns</a> 
+                    <a href="#" class="{{o.colour}}" style={{o.style}}>{{o.name}} Sort : {{o.value}} ms</a> 
                 </div>
             </div>
         </div> 
