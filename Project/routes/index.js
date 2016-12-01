@@ -17,7 +17,7 @@ router.get('/', function (req, res, next) {
 router.get('/sort', function (req, res) {
     var no = req.param('no');
 
-    console.log(no);
+    //console.log(no);
 
     var uniqueNumber = new UniqueNumber();
     var numbers = [];
@@ -25,41 +25,70 @@ router.get('/sort', function (req, res) {
         numbers.push(uniqueNumber.generate());
     }
 
+    var hrTime = process.hrtime()
+    console.log(hrTime[0] * 1000000 + hrTime[1] / 1000)
+
     //MERGE SORT
-    var startMerge = new Date().getMilliseconds();
+    var hrTime = process.hrtime()
+    var mergeStart = hrTime[0] * 1000000 + hrTime[1] / 1000;
+
     console.log(mergeSort(numbers));
-    var elapsedMerge = (new Date().getMilliseconds() - startMerge) / 1000000;
-    console.log(elapsedMerge);
 
-    // QUICK SORT
-    var startQuick = new Date().getMilliseconds();
+    hrTime = process.hrtime()
+    var mergeStop = hrTime[0] * 1000000 + hrTime[1] / 1000;
+
+    elapsedMerge = mergeStop - mergeStart;
+
+    // QUICK SORT 
+    hrTime = process.hrtime()
+    var quickStart = hrTime[0] * 1000000 + hrTime[1] / 1000;
+
     console.log(quickSort(numbers));
-    var elapsedQuick = (new Date().getMilliseconds() - startQuick) / 1000000;
-    console.log(elapsedQuick);
 
-    //HEAP SORT
-    var startHeap = new Date().getMilliseconds();
+    hrTime = process.hrtime()
+    var quickStop = hrTime[0] * 1000000 + hrTime[1] / 1000;
+
+    elapsedQuick = quickStop - quickStart;
+
+    //HEAP SORT 
+    hrTime = process.hrtime()
+    var heapStart = hrTime[0] * 1000000 + hrTime[1] / 1000;
+
     console.log(heapSort(numbers));
-    var elapsedHeap = (new Date().getMilliseconds() - startHeap) / 1000000;
-    console.log(elapsedHeap);
 
-    //INSERTION SORT
-    var startInsertion = new Date().getMilliseconds();
+    hrTime = process.hrtime()
+    var heapStop = hrTime[0] * 1000000 + hrTime[1] / 1000;
+
+    elapsedHeap = heapStop - heapStart;
+
+    //INSERTION SORT 
+    hrTime = process.hrtime()
+    var insertionStart = hrTime[0] * 1000000 + hrTime[1] / 1000;
+
     console.log(insertionSort(numbers));
-    var elapsedInsertion = (new Date().getMilliseconds() - startInsertion) / 100000;
-    console.log(elapsedInsertion);
 
-    //RADIX SORT
-    var startRadix = new Date().getMilliseconds();
+    hrTime = process.hrtime()
+    var insertionStop = hrTime[0] * 1000000 + hrTime[1] / 1000;
+
+    elapsedInsertion = insertionStop - insertionStart;
+
+    //RADIX SORT 
+    hrTime = process.hrtime()
+    var radixStart = hrTime[0] * 1000000 + hrTime[1] / 1000;
+
     console.log(radixSort(numbers));
-    var elapsedRadix = (new Date().getMilliseconds() - startRadix) / 1000000;
-    console.log(elapsedRadix);
+
+    hrTime = process.hrtime()
+    var radixStop = hrTime[0] * 1000000 + hrTime[1] / 1000;
+
+    elapsedRadix = radixStop - radixStart;
 
     var data = {
         numbers: numbers,
         time: [elapsedMerge, elapsedQuick, elapsedHeap, elapsedInsertion, elapsedRadix]
     };
 
+    res.send(data);
 });
 
 module.exports = router;
